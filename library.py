@@ -57,17 +57,24 @@ def tambah_buku():
 
 """TAMPILAN MENU UNTUK MENGHAPUS BUKU"""
 def hapus_buku():
-    if not buku:
-        print("Tidak Ada Buku Yang Ingin Dihapus!!")
-    else:
-        hapus = int(input("Masukkan Nomor Buku Yang Anda Ingin Hapus: "))
-        if 1 <= hapus <= len(buku):
-            buku.pop(hapus - 1)
-            print("YEY!! Berhasil Menghapus Buku")
-            time.sleep(1)
+    while True:
+        if not buku:
+            print("Tidak Ada Buku Yang Ingin Dihapus!!")
         else:
-            print("Nomor Buku Tidak Tersedia")
-            time.sleep(1)
+            try:
+                hapus = int(input("Masukkan Nomor Buku Yang Anda Ingin Hapus: "))
+                if 1 <= hapus <= len(buku):
+                    buku.pop(hapus - 1)
+                    print("YEY!! Berhasil Menghapus Buku:D")
+                    time.sleep(1)
+                    break
+                else:
+                    print("Nomor Buku Tidak Tersedia")
+                    time.sleep(1)
+            except ValueError:
+                print("Harap Memasukkan Nomor Buku Yang Benar Yah:D")
+                time.sleep(1)
+                continue
 
 """TAMPILAN MENU UNTUK MENCARI BUKU"""
 def mencari():

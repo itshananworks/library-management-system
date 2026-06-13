@@ -11,19 +11,21 @@ def menu_library():
         print("2.Tambah Buku")
         print("3.Hapus Buku")
         print("4.Cari Buku")
-        print("5.Keluar Perpustakaan")
+        print("5.Edit Buku")
+        print("6.Keluar Perpustakaan")
         pilihan_pengguna = input("Masukkan Pilihan Anda: ").lower()
         if pilihan_pengguna not in [
             "1", "lihat buku",
             "2", "tambah buku",
             "3", "hapus buku",
             "4", "cari buku",
-            "5", "keluar perpustakaan"
+            "5", "edit buku",
+            "6", "keluar perpustakaan"
         ]:
             print("Pilihan Tidak Valid!!")
             continue
         else:
-            if pilihan_pengguna in ["5", "keluar perpustakaan"]:
+            if pilihan_pengguna in ["6", "keluar perpustakaan"]:
                 print("Terima Kasih Telah Menggunakan Perpustakaan Kami:D")
                 time.sleep(1)
                 break
@@ -35,6 +37,8 @@ def menu_library():
                 hapus_buku()
             elif pilihan_pengguna in ["4", "cari buku"]:
                 mencari()
+            elif pilihan_pengguna in ["5", "edit buku"]:
+                edit()
 
 
 
@@ -82,13 +86,40 @@ def mencari():
     cari_buku = input("Masukkan Nama Buku: ")
     ditemukan = False
     for i in range(len(buku)):
-        if buku[i] == cari_buku:
+        if buku[i].lower() == cari_buku.lower():
             ditemukan = True
             print("YEY!! Buku Yang Dicari Ditemukan:D")
             print("Nomor buku", i + 1)
             break
     if not ditemukan:
         print("Buku Yang Anda Cari Tidak Ditemukan")
+
+"""TAMPILAN MENU UNTUK MENGEDIT BUKU"""
+def edit():
+    while True:
+        try:
+            if not buku:
+                print("Belum Ada Buku Yang ditambahkan")
+                break
+            else:
+                nomor_buku_edit = int(input("Masukkan Nomor Buku Yang Anda Ingin Edit: "))
+                judul_buku_edit = input("Masukkan Judul Buku Baru: ")
+                if 1 <= nomor_buku_edit <= len(buku):
+                    buku[nomor_buku_edit - 1] = judul_buku_edit
+                    print("YEY!! Buku Berhasil Diperbarui")
+                    break
+                else:
+                    print("Nomor Buku Tidak Tersedia")
+                    continue
+        except ValueError:
+            print("Harap Memasukkan Nomor Buku Yang Benar!")
+            continue
+
+
+
+
+
+
 
 """TEMPAT PROSES DATA"""
 menu_library()

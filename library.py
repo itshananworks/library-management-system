@@ -12,7 +12,8 @@ def menu_library():
         print("3.Hapus Buku")
         print("4.Cari Buku")
         print("5.Edit Buku")
-        print("6.Keluar Perpustakaan")
+        print("6.Statistik Perpustakaan")
+        print("7.Keluar Perpustakaan")
         pilihan_pengguna = input("Masukkan Pilihan Anda: ").lower()
         if pilihan_pengguna not in [
             "1", "lihat buku",
@@ -20,12 +21,13 @@ def menu_library():
             "3", "hapus buku",
             "4", "cari buku",
             "5", "edit buku",
-            "6", "keluar perpustakaan"
+            "6", "statistik perpustakaan",
+            "7", "keluar perpustakaan"
         ]:
             print("Pilihan Tidak Valid!!")
             continue
         else:
-            if pilihan_pengguna in ["6", "keluar perpustakaan"]:
+            if pilihan_pengguna in ["7", "keluar perpustakaan"]:
                 print("Terima Kasih Telah Menggunakan Perpustakaan Kami:D")
                 time.sleep(1)
                 break
@@ -39,6 +41,8 @@ def menu_library():
                 mencari()
             elif pilihan_pengguna in ["5", "edit buku"]:
                 edit()
+            elif pilihan_pengguna in ["6", "statistik perpustakaan"]:
+                statistik_perpustakaan()
 
 
 
@@ -115,8 +119,11 @@ def edit():
             print("Harap Memasukkan Nomor Buku Yang Benar!")
             continue
 
-
-
+"""TAMPILAN MENU UNTUK MELIHAT STATISTIK PERPUSTAKAAN"""
+def statistik_perpustakaan():
+    print("=" * 30, "STATISTIK PERPUSTAKAAN", "=" * 30)
+    print("Jumlah Buku:",len(buku))
+    time.sleep(3)
 
 
 

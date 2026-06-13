@@ -32,24 +32,37 @@ def menu_library():
                 time.sleep(1)
                 break
             elif pilihan_pengguna in ["1", "lihat buku"]:
-                lihat_buku()
+                lihat_buku(buku)
             elif pilihan_pengguna in ["2", "tambah buku"]:
-                tambah_buku()
+                tambah_buku(buku)
             elif pilihan_pengguna in ["3", "hapus buku"]:
-                hapus_buku()
+                hapus_buku(buku)
             elif pilihan_pengguna in ["4", "cari buku"]:
-                mencari()
+                mencari(buku)
             elif pilihan_pengguna in ["5", "edit buku"]:
-                edit()
+                edit(buku)
             elif pilihan_pengguna in ["6", "statistik perpustakaan"]:
-                statistik_perpustakaan()
+                statistik_perpustakaan(buku)
 
 
 
+
+"""TEMPAT UNTUK MASUKKAN NOMOR BUKU"""
+def input_nomor():
+    try:
+        nomor = int(input("Masukkan Nomor Buku: "))
+        return nomor
+    except ValueError:
+        return None
+
+"""TEMPAT UNTUK MEMASUKKAN JUDUL/NAMA BUKU"""
+def input_judul_atau_nama_buku():
+    nama_atau_judul = input("Masukkan Judul Buku/Nama Buku: ")
+    return nama_atau_judul
 
 
 """TAMPILAN MENU UNTUK MELIHAT BUKU"""
-def lihat_buku():
+def lihat_buku(buku):
     if not buku:
         print("Belum Ada Buku Yang Ditambahkan")
     else:
@@ -57,37 +70,35 @@ def lihat_buku():
             print(i + 1,".", buku[i])
 
 """TAMPILAN MENU UNTUK MENAMBAH BUKU"""
-def tambah_buku():
-    nama_buku = input("Masukkan Nama Buku: ")
+def tambah_buku(buku):
+    nama_buku = input_judul_atau_nama_buku()
     print("YEY!! Berhasil Menambahkan Buku")
     time.sleep(1)
     buku.append(nama_buku)
 
 """TAMPILAN MENU UNTUK MENGHAPUS BUKU"""
-def hapus_buku():
+def hapus_buku(buku):
     while True:
         if not buku:
             print("Tidak Ada Buku Yang Ingin Dihapus!!")
+            time.sleep(1)
+            break
+        hapus = input_nomor()
+        if hapus is None:
+            print("Harap Memasukkan Nomor Buku Yang Benar Yah:D")
+            time.sleep(1)
+            continue
+        if 1 <= hapus <= len(buku):
+            buku.pop(hapus - 1)
+            print("YEY!! Berhasil Menghapus Buku:D")
+            time.sleep(1)
             break
         else:
-            try:
-                hapus = int(input("Masukkan Nomor Buku Yang Anda Ingin Hapus: "))
-                if 1 <= hapus <= len(buku):
-                    buku.pop(hapus - 1)
-                    print("YEY!! Berhasil Menghapus Buku:D")
-                    time.sleep(1)
-                    break
-                else:
-                    print("Nomor Buku Tidak Tersedia")
-                    time.sleep(1)
-            except ValueError:
-                print("Harap Memasukkan Nomor Buku Yang Benar Yah:D")
-                time.sleep(1)
-                continue
+            print("Nomor Buku Tidak Tersedia")
 
 """TAMPILAN MENU UNTUK MENCARI BUKU"""
-def mencari():
-    cari_buku = input("Masukkan Nama Buku: ")
+def mencari(buku):
+    cari_buku = input_judul_atau_nama_buku()
     ditemukan = False
     for i in range(len(buku)):
         if buku[i].lower() == cari_buku.lower():
@@ -97,30 +108,31 @@ def mencari():
             break
     if not ditemukan:
         print("Buku Yang Anda Cari Tidak Ditemukan")
+        time.sleep(1)
 
 """TAMPILAN MENU UNTUK MENGEDIT BUKU"""
-def edit():
+def edit(buku):
     while True:
-        try:
             if not buku:
                 print("Belum Ada Buku Yang ditambahkan")
+                time.sleep(1)
+                break
+            nomor_buku_edit = input_nomor()
+            if nomor_buku_edit is None:
+                print("Nomor Buku Tidak Tersedia, Harap Memasukkan Nomor Buku Yang Benar Yah:D")
+                time.sleep(1)
+                continue
+            if 1 <= nomor_buku_edit <= len(buku):
+                judul_buku_edit = input_judul_atau_nama_buku()
+                buku[nomor_buku_edit - 1] = judul_buku_edit
+                print("YEY!! Buku Berhasil Diperbarui:D")
+                time.sleep(1)
                 break
             else:
-                nomor_buku_edit = int(input("Masukkan Nomor Buku Yang Anda Ingin Edit: "))
-                judul_buku_edit = input("Masukkan Judul Buku Baru: ")
-                if 1 <= nomor_buku_edit <= len(buku):
-                    buku[nomor_buku_edit - 1] = judul_buku_edit
-                    print("YEY!! Buku Berhasil Diperbarui")
-                    break
-                else:
-                    print("Nomor Buku Tidak Tersedia")
-                    continue
-        except ValueError:
-            print("Harap Memasukkan Nomor Buku Yang Benar!")
-            continue
+                print("Nomor Buku Tidak Tersedia!")
 
 """TAMPILAN MENU UNTUK MELIHAT STATISTIK PERPUSTAKAAN"""
-def statistik_perpustakaan():
+def statistik_perpustakaan(buku):
     print("=" * 30, "STATISTIK PERPUSTAKAAN", "=" * 30)
     print("Jumlah Buku:",len(buku))
     time.sleep(3)

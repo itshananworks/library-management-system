@@ -60,6 +60,7 @@ def hapus_buku():
     while True:
         if not buku:
             print("Tidak Ada Buku Yang Ingin Dihapus!!")
+            break
         else:
             try:
                 hapus = int(input("Masukkan Nomor Buku Yang Anda Ingin Hapus: "))

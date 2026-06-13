@@ -10,18 +10,20 @@ def menu_library():
         print("1.Lihat Buku")
         print("2.Tambah Buku")
         print("3.Hapus Buku")
-        print("4.Keluar Perpustakaan")
+        print("4.Cari Buku")
+        print("5.Keluar Perpustakaan")
         pilihan_pengguna = input("Masukkan Pilihan Anda: ").lower()
         if pilihan_pengguna not in [
             "1", "lihat buku",
             "2", "tambah buku",
             "3", "hapus buku",
-            "4", "keluar perpustakaan"
+            "4", "cari buku",
+            "5", "keluar perpustakaan"
         ]:
             print("Pilihan Tidak Valid!!")
             continue
         else:
-            if pilihan_pengguna in ["4", "keluar perpustakaan"]:
+            if pilihan_pengguna in ["5", "keluar perpustakaan"]:
                 print("Terima Kasih Telah Menggunakan Perpustakaan Kami:D")
                 time.sleep(1)
                 break
@@ -31,6 +33,8 @@ def menu_library():
                 tambah_buku()
             elif pilihan_pengguna in ["3", "hapus buku"]:
                 hapus_buku()
+            elif pilihan_pengguna in ["4", "cari buku"]:
+                mencari()
 
 
 
@@ -65,7 +69,18 @@ def hapus_buku():
             print("Nomor Buku Tidak Tersedia")
             time.sleep(1)
 
-
+"""TAMPILAN MENU UNTUK MENCARI BUKU"""
+def mencari():
+    cari_buku = input("Masukkan Nama Buku: ")
+    ditemukan = False
+    for i in range(len(buku)):
+        if buku[i] == cari_buku:
+            ditemukan = True
+            print("YEY!! Buku Yang Dicari Ditemukan:D")
+            print("Nomor buku", i + 1)
+            break
+    if not ditemukan:
+        print("Buku Yang Anda Cari Tidak Ditemukan")
 
 """TEMPAT PROSES DATA"""
 menu_library()

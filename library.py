@@ -1,6 +1,6 @@
 import time
 
-buku = []
+
 
 
 """TAMPILAN MENU PERPUSTAKAAN"""
@@ -46,6 +46,27 @@ def menu_library():
 
 
 
+"""TEMPAT UNTUK MEMBUAT FILE BUKU"""
+def simpan_buku(buku):
+    file = open("data_buku.txt", "w")
+    for judul in buku:
+        file.write(judul + "\n")
+    file.close()
+
+
+
+def muat_buku():
+    buku = []
+    try:
+        file = open("data_buku.txt", "r")
+        for baris in file:
+            buku.append(baris.strip())
+        file.close()
+    except FileNotFoundError:
+        pass
+    return buku
+
+buku = muat_buku()
 
 """TEMPAT UNTUK MASUKKAN NOMOR BUKU"""
 def input_nomor():
@@ -72,9 +93,10 @@ def lihat_buku(buku):
 """TAMPILAN MENU UNTUK MENAMBAH BUKU"""
 def tambah_buku(buku):
     nama_buku = input_judul_atau_nama_buku()
+    buku.append(nama_buku)
+    simpan_buku(buku)
     print("YEY!! Berhasil Menambahkan Buku")
     time.sleep(1)
-    buku.append(nama_buku)
 
 """TAMPILAN MENU UNTUK MENGHAPUS BUKU"""
 def hapus_buku(buku):
@@ -90,6 +112,7 @@ def hapus_buku(buku):
             continue
         if 1 <= hapus <= len(buku):
             buku.pop(hapus - 1)
+            simpan_buku(buku)
             print("YEY!! Berhasil Menghapus Buku:D")
             time.sleep(1)
             break
@@ -125,6 +148,7 @@ def edit(buku):
             if 1 <= nomor_buku_edit <= len(buku):
                 judul_buku_edit = input_judul_atau_nama_buku()
                 buku[nomor_buku_edit - 1] = judul_buku_edit
+                simpan_buku(buku)
                 print("YEY!! Buku Berhasil Diperbarui:D")
                 time.sleep(1)
                 break

@@ -38,19 +38,10 @@ python library.py
 
 ## 📌 Current Status
 
-Version 1 (List-based implementation)
+Version 1
 
 ---
 
-## 🔮 Future Improvements
-
-* Refactor code using functions (V2)
-* Add "Edit book" feature
-* Add search book feature
-* Convert list data into dictionary structure
-* Save data to file (persistent storage)
-* Improve UI/UX in terminal
-* Apply OOP (Object-Oriented Programming)
 
 ---
 
